@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bocadão Burger | Cardápio Completo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#161210;
+    --bg2:#1e1815;
+    --paper:#f6efe1;
+    --paper-dim:#e6dcc7;
+    --orange:#ff7a1a;
+    --orange-deep:#e05e0a;
+    --rust:#c1401f;
+    --mustard:#f4b93e;
+    --ink:#1a1310;
+    --line:rgba(246,239,225,0.14);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'Work Sans', sans-serif;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(255,122,26,0.05), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(244,185,62,0.05), transparent 45%);
+  }
+
+  /* grain texture */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    line-height:0.95;
+  }
+
+  .marker{
+    font-family:'Permanent Marker', cursive;
+    text-transform:none;
+    letter-spacing:0.5px;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(20,16,14,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 24px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Anton', sans-serif;
+    font-size:1.3rem;
+    color:var(--paper);
+  }
+  .brand .bun{
+    width:34px;height:34px;
+    border-radius:50%;
+    background:linear-gradient(180deg, var(--mustard), var(--orange));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;
+    box-shadow:0 0 0 2px var(--paper);
+  }
+  nav.links{
+    display:flex;
+    gap:6px;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.links::-webkit-scrollbar{display:none;}
+  nav.links a{
+    font-size:0.72rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:9px 14px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    white-space:nowrap;
+    transition:.2s;
+  }
+  nav.links a:hover{
+    background:var(--orange);
+    border-color:var(--orange);
+    color:var(--ink);
+  }
+  .nav-cta{
+    display:none;
+  }
+  @media(min-width:860px){
+    .nav-cta{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#25D366;
+      color:#0c1a0f;
+      font-weight:800;
+      font-size:0.8rem;
+      padding:10px 16px;
+      border-radius:999px;
+      margin-left:14px;
+      white-space:nowrap;
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 24px 70px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:50%;top:-60%;
+    transform:translateX(-50%);
+    width:900px;height:900px;
+    background:radial-gradient(circle, rgba(255,122,26,0.16), transparent 65%);
+    z-index:0;
+  }
+  .hero-inner{position:relative;z-index:1;}
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Permanent Marker', cursive;
+    color:var(--mustard);
+    font-size:1.05rem;
+    margin-bottom:18px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:"★";
+    color:var(--orange);
+    font-size:0.8rem;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 10vw, 6.6rem);
+    color:var(--paper);
+    text-shadow:4px 4px 0 var(--rust), 8px 8px 0 rgba(0,0,0,0.35);
+  }
+  .hero h1 span{color:var(--orange);}
+  .hero p.sub{
+    max-width:560px;
+    margin:26px auto 0;
+    font-size:1.05rem;
+    color:var(--paper-dim);
+    line-height:1.6;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:34px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 30px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:0.95rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{
+    background:#25D366;
+    color:#0c1a0f;
+    box-shadow:0 8px 24px rgba(37,211,102,0.25);
+  }
+  .btn-ghost{
+    border:2px solid var(--paper);
+    color:var(--paper);
+  }
+  .stamp{
+    position:absolute;
+    right:6%;
+    top:22%;
+    width:110px;height:110px;
+    border:3px dashed var(--mustard);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    font-family:'Permanent Marker', cursive;
+    font-size:0.85rem;
+    color:var(--mustard);
+    transform:rotate(-14deg);
+    z-index:2;
+  }
+  @media(max-width:760px){.stamp{display:none;}}
+
+  /* ---------- QUICK CATEGORY STRIP ---------- */
+  .cat-strip{
+    padding:34px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .cat-strip .wrap{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:4px;
+    scrollbar-width:none;
+  }
+  .cat-strip .wrap::-webkit-scrollbar{display:none;}
+  .cat-chip{
+    flex:0 0 auto;
+    background:var(--bg2);
+    border:1px solid var(--line);
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    transition:.2s;
+  }
+  .cat-chip:hover{border-color:var(--orange); color:var(--orange);}
+
+  /* ---------- SECTION FRAME ---------- */
+  section.menu{
+    padding:76px 24px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  section.menu:nth-of-type(even){
+    background:var(--bg2);
+  }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(2.2rem, 6vw, 3.4rem);
+    color:var(--paper);
+  }
+  .section-head h2 em{
+    font-style:normal;
+    color:var(--orange);
+  }
+  .section-tag{
+    font-family:'Permanent Marker', cursive;
+    color:var(--mustard);
+    font-size:1rem;
+  }
+  .section-desc{
+    max-width:520px;
+    color:var(--paper-dim);
+    font-size:0.95rem;
+    margin-top:8px;
+    line-height:1.55;
+  }
+  .rule{
+    height:3px;
+    background:repeating-linear-gradient(90deg, var(--orange) 0 18px, transparent 18px 26px);
+    margin:26px 0 40px;
+    opacity:0.7;
+  }
+
+  /* ---------- CARD GRID (items with descriptions e.g. burgers) ---------- */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:22px;
+  }
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:26px 24px 24px;
+    position:relative;
+    transition:.2s;
+  }
+  .card:hover{
+    border-color:var(--orange);
+    transform:translateY(-4px);
+  }
+  .card .badge{
+    position:absolute;
+    top:-12px;
+    right:20px;
+    background:var(--orange);
+    color:var(--ink);
+    font-weight:800;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    padding:5px 12px;
+    border-radius:999px;
+    letter-spacing:0.04em;
+  }
+  .card h3{
+    font-size:1.35rem;
+    color:var(--paper);
+    margin-bottom:10px;
+  }
+  .card p{
+    color:var(--paper-dim);
+    font-size:0.86rem;
+    line-height:1.55;
+    min-height:60px;
+  }
+  .card .price-row{
+    margin-top:18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .price{
+    font-family:'Anton', sans-serif;
+    font-size:1.5rem;
+    color:var(--mustard);
+  }
+  .price small{font-size:0.85rem;vertical-align:top;}
+  .add-btn{
+    width:38px;height:38px;
+    border-radius:50%;
+    background:var(--orange);
+    color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;
+    font-weight:800;
+    flex:0 0 auto;
+  }
+
+  /* ---------- LIST STYLE (dotted leader, like the real chalkboard menu) ---------- */
+  .list-block{margin-bottom:44px;}
+  .list-title{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--orange);
+    color:var(--ink);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    font-size:0.85rem;
+    padding:8px 18px;
+    border-radius:8px;
+    margin-bottom:20px;
+  }
+  .price-list{}
+  .price-list li{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding:13px 0;
+    border-bottom:1px dotted var(--line);
+    font-size:1.02rem;
+    font-weight:600;
+    color:var(--paper);
+  }
+  .price-list li .name{white-space:nowrap;}
+  .price-list li .fill{
+    flex:1;
+    border-bottom:2px dotted rgba(255,122,26,0.55);
+    transform:translateY(-6px);
+    height:0;
+  }
+  .price-list li .amt{
+    font-family:'Anton', sans-serif;
+    color:var(--mustard);
+    font-size:1.15rem;
+    white-space:nowrap;
+  }
+  .price-list li .amt sup{font-size:0.65rem;}
+
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  @media(min-width:760px){
+    .two-col{grid-template-columns:1fr 1fr;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:70px 24px 40px;
+    text-align:center;
+    position:relative;
+  }
+  footer .stamp2{
+    width:96px;height:96px;
+    margin:0 auto 24px;
+    border-radius:50%;
+    background:linear-gradient(180deg, var(--mustard), var(--orange));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Anton', sans-serif;
+    color:var(--ink);
+    font-size:0.75rem;
+    text-align:center;
+    line-height:1.1;
+    box-shadow:0 0 0 3px var(--paper);
+  }
+  footer h2{
+    font-size:clamp(2rem,6vw,3rem);
+    margin-bottom:16px;
+  }
+  footer p{
+    color:var(--paper-dim);
+    max-width:440px;
+    margin:0 auto 30px;
+  }
+  .foot-info{
+    margin-top:40px;
+    padding-top:30px;
+    border-top:1px solid var(--line);
+    color:var(--paper-dim);
+    font-size:0.8rem;
+  }
+  .foot-info strong{color:var(--paper);}
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-cta{
+    position:fixed;
+    bottom:22px;
+    right:22px;
+    z-index:200;
+    background:#25D366;
+    color:#0c1a0f;
+    width:60px;height:60px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.6rem;
+    box-shadow:0 10px 26px rgba(0,0,0,0.4);
+    animation:pulse 2.6s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}
+    70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}
+    100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .float-cta{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  @media(max-width:600px){
+    .price-list li{font-size:0.92rem;}
+    .hero{padding:70px 18px 50px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand"><span class="bun">🍔</span> BOCADÃO</div>
+    <nav class="links">
+      <a href="#combos">Combos</a>
+      <a href="#artesanal">Artesanal</a>
+      <a href="#tradicional">Tradicional</a>
+      <a href="#adicionais">Adicionais</a>
+      <a href="#bebidas">Bebidas</a>
+      <a href="#cremes">Cremes</a>
+      <a href="#porcoes">Porções</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/556292717240" target="_blank" rel="noopener">📲 Pedir agora</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="stamp">ORIGINAL<br>DESDE<br>SEMPRE</div>
+  <div class="hero-inner">
+    <span class="eyebrow marker">sabor de verdade</span>
+    <h1>O BOCADÃO<br>QUE VOCÊ<br><span>PEDE DE NOVO</span></h1>
+    <p class="sub">Burgers artesanais e tradicionais, combos generosos, bebidas geladas e aquele adicional que falta na sua vida. Cardápio completo, pedido direto no WhatsApp.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://wa.me/556292717240" target="_blank" rel="noopener">📲 Fazer pedido no WhatsApp</a>
+      <a class="btn btn-ghost" href="#artesanal">Ver cardápio</a>
+    </div>
+  </div>
+</section>
+
+<div class="cat-strip">
+  <div class="wrap">
+    <a class="cat-chip" href="#combos">🔥 Combos</a>
+    <a class="cat-chip" href="#artesanal">🍔 Artesanal</a>
+    <a class="cat-chip" href="#tradicional">🌭 Tradicional</a>
+    <a class="cat-chip" href="#adicionais">➕ Adicionais</a>
+    <a class="cat-chip" href="#bebidas">🥤 Bebidas</a>
+    <a class="cat-chip" href="#cremes">🍓 Cremes</a>
+    <a class="cat-chip" href="#porcoes">🍟 Porções</a>
+  </div>
+</div>
+
+<!-- COMBOS -->
+<section class="menu" id="combos">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">para o dia a dia</span>
+        <h2>C<em>o</em>mbos</h2>
+        <p class="section-desc">Sabor, qualidade e praticidade pra você. Válidos somente para os hambúrgueres de 100g.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="badge">monte o seu</span>
+        <h3>Trio Bocadão</h3>
+        <p>Burger + fritas + bebida. Monte do seu jeito: escolha o burger favorito (hambúrguer de 100g), combine com nossas batatas fritas crocantes e finalize com a bebida.</p>
+        <div class="price-row"><span class="price">R$ 45<small>,99</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <span class="badge">pra dois</span>
+        <h3>Dupla Perfeita</h3>
+        <p>2 burgers + 2 fritas + 2 Coca-Cola lata. Mate a fome do jeito certo: 2 burgers com hambúrgueres de 100g, 2 fritas crocantes e 2 cocas geladas pra fechar o combo.</p>
+        <div class="price-row"><span class="price">R$ 90<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Big Boss + Fritas + Coca-Cola Lata</h3>
+        <p>Pão premium com crosta dourada de parmesão, dois hambúrgueres suculentos de 100g cada, bacon e cheddar.</p>
+        <div class="price-row"><span class="price">R$ 47<small>,99</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Furioso + Fritas + Coca-Cola Lata</h3>
+        <p>Pão brioche, blend bovino de 100g artesanal assado na chapa, queijo cheddar e bacon artesanal, alface e tomates frescos.</p>
+        <div class="price-row"><span class="price">R$ 41<small>,99</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Over Land New + Fritas + Coca-Cola Lata</h3>
+        <p>Nosso delicioso Overland acompanha pão brioche com parmesão, hambúrguer artesanal de 100g feito na chapa, molho do cheff e bacon.</p>
+        <div class="price-row"><span class="price">R$ 42<small>,99</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <span class="badge">kids</span>
+        <h3>Bocadão Kids + Fritas + Coca 200ml</h3>
+        <p>Pão brioche kids, molho do cheff, mussarela e hambúrguer de 100g. Acompanha fritas e Coca-Cola 200ml.</p>
+        <div class="price-row"><span class="price">R$ 31<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTESANAL -->
+<section class="menu" id="artesanal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">ingredientes selecionados</span>
+        <h2>Hambúrguer <em>Artesanal</em></h2>
+        <p class="section-desc">Sabor autêntico, blend bovino artesanal e pão brioche. Feito na chapa, do nosso jeito.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Over Land New</h3>
+        <p>Pão brioche com parmesão, hambúrguer artesanal de 100g feito na chapa, molho do cheff e bacon.</p>
+        <div class="price-row"><span class="price">R$ 25<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Furioso</h3>
+        <p>Pão brioche, blend bovino de 100g artesanal assado na chapa, queijo cheddar e bacon artesanal em fatia, alface e tomates frescos.</p>
+        <div class="price-row"><span class="price">R$ 25<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Brioche Prime</h3>
+        <p>Feito com pão de brioche super macio, burger suculento de 100g, bacon crocante e cheddar cremoso.</p>
+        <div class="price-row"><span class="price">R$ 29<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <span class="badge">mais pedido</span>
+        <h3>Royale</h3>
+        <p>2 burgers suculentos de 100g, 2 fatias de cheddar, bacon e molho da casa no pão de brioche.</p>
+        <div class="price-row"><span class="price">R$ 30<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Big Boss</h3>
+        <p>Pão premium com crosta dourada de parmesão, dois hambúrgueres suculentos de 100g cada, bacon e cheddar.</p>
+        <div class="price-row"><span class="price">R$ 35<small>,99</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Golden Bite Blend</h3>
+        <p>Pão de brioche selado na manteiga, hambúrguer artesanal de 200g, queijo cheddar, cebola caramelizada e bacon.</p>
+        <div class="price-row"><span class="price">R$ 38<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>Pepper Burguer Blend</h3>
+        <p>Pão brioche, carne de 200g, queijo minas, bacon, cream cheese e geleia de pimenta.</p>
+        <div class="price-row"><span class="price">R$ 45<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <span class="badge">kids</span>
+        <h3>Bocadão Kids</h3>
+        <p>Pão brioche kids, molho do cheff, mussarela e hambúrguer de 100g.</p>
+        <div class="price-row"><span class="price">R$ 21<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRADICIONAL -->
+<section class="menu" id="tradicional">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">clássico de sempre</span>
+        <h2>Hambúrguer <em>Tradicional</em></h2>
+        <p class="section-desc">Aquele x-tudo enrolado no papel, com batata palha e muito recheio. Ingredientes selecionados, sabor autêntico.</p>
+      </div>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>X-House (X-Tudo)</h3>
+        <p>Hambúrguer suculento de 100g com mussarela, presunto, bacon, 2 salsichas e ovo, no pão macio. Completo com alface, tomate, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 30<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <span class="badge">para dois</span>
+        <h3>X-Bocadão</h3>
+        <p>2 hambúrgueres suculentos de 200g com 2 mussarelas, 2 presuntos, bacon, 2 salsichas e ovo, no pão macio. Completo com alface, tomate, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 49<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>X-Bacon Especial</h3>
+        <p>Hambúrguer suculento de 100g com bacon crocante e ovo frito, presunto e mussarela derretida. Alface, tomate frescos, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 27<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>X-Bacon Simples</h3>
+        <p>Pão, hambúrguer de 100g, bacon, presunto, mussarela, alface, tomate, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 25<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>X-Salada Especial</h3>
+        <p>Pão selado na chapa, hambúrguer de 100g, queijo, ovo, presunto, alface, tomate, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 22<small>,00</small></span><span class="add-btn">+</span></div>
+      </div>
+      <div class="card">
+        <h3>X-Salada Simples</h3>
+        <p>Pão selado na chapa, hambúrguer de 100g, queijo, alface, tomate, milho e batata palha.</p>
+        <div class="price-row"><span class="price">R$ 20<small>,90</small></span><span class="add-btn">+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADICIONAIS -->
+<section class="menu" id="adicionais">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">turbine seu lanche</span>
+        <h2>Adicio<em>n</em>ais</h2>
+        <p class="section-desc">Faltou alguma coisa no seu burger? Escolha os extras.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="list-block">
+        <span class="list-title">Hambúrguer Artesanal</span>
+        <ul class="price-list">
+          <li><span class="name">+ Carne 100g</span><span class="fill"></span><span class="amt">R$10<sup>,00</sup></span></li>
+          <li><span class="name">Cheddar em fatia</span><span class="fill"></span><span class="amt">R$4<sup>,00</sup></span></li>
+          <li><span class="name">Mussarela em fatia</span><span class="fill"></span><span class="amt">R$4<sup>,00</sup></span></li>
+          <li><span class="name">Bacon</span><span class="fill"></span><span class="amt">R$5<sup>,00</sup></span></li>
+        </ul>
+      </div>
+      <div class="list-block">
+        <span class="list-title">Hambúrguer Tradicional</span>
+        <ul class="price-list">
+          <li><span class="name">+ Hambúrguer (frango) 100g</span><span class="fill"></span><span class="amt">R$10<sup>,00</sup></span></li>
+          <li><span class="name">Catupiry</span><span class="fill"></span><span class="amt">R$5<sup>,00</sup></span></li>
+          <li><span class="name">Cheddar cremoso</span><span class="fill"></span><span class="amt">R$5<sup>,00</sup></span></li>
+          <li><span class="name">Mussarela em fatia</span><span class="fill"></span><span class="amt">R$4<sup>,00</sup></span></li>
+          <li><span class="name">Bacon</span><span class="fill"></span><span class="amt">R$5<sup>,00</sup></span></li>
+          <li><span class="name">Salsicha</span><span class="fill"></span><span class="amt">R$3<sup>,00</sup></span></li>
+          <li><span class="name">Ovo</span><span class="fill"></span><span class="amt">R$2<sup>,00</sup></span></li>
+          <li><span class="name">Abacaxi</span><span class="fill"></span><span class="amt">R$2<sup>,00</sup></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEBIDAS -->
+<section class="menu" id="bebidas">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">pra acompanhar</span>
+        <h2>Beb<em>i</em>das</h2>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="list-block">
+        <span class="list-title">Refrigerantes</span>
+        <ul class="price-list">
+          <li><span class="name">Coca-Cola 2L</span><span class="fill"></span><span class="amt">R$15<sup>,00</sup></span></li>
+          <li><span class="name">Coca-Cola 1L</span><span class="fill"></span><span class="amt">R$13<sup>,00</sup></span></li>
+          <li><span class="name">Guaraná Antarctica 2L</span><span class="fill"></span><span class="amt">R$14<sup>,00</sup></span></li>
+          <li><span class="name">Coca-Cola Lata 350ml</span><span class="fill"></span><span class="amt">R$6<sup>,00</sup></span></li>
+          <li><span class="name">Guaraná Antarctica lata</span><span class="fill"></span><span class="amt">R$6<sup>,00</sup></span></li>
+          <li><span class="name">Fanta Laranja lata</span><span class="fill"></span><span class="amt">R$6<sup>,00</sup></span></li>
+          <li><span class="name">Coca-Cola Zero lata 350ml</span><span class="fill"></span><span class="amt">R$6<sup>,00</sup></span></li>
+        </ul>
+      </div>
+      <div class="list-block">
+        <span class="list-title">Sucos 500ml</span>
+        <ul class="price-list">
+          <li><span class="name">Suco de morango</span><span class="fill"></span><span class="amt">R$11<sup>,90</sup></span></li>
+          <li><span class="name">Suco de abacaxi</span><span class="fill"></span><span class="amt">R$11<sup>,90</sup></span></li>
+          <li><span class="name">Suco de acerola</span><span class="fill"></span><span class="amt">R$11<sup>,90</sup></span></li>
+          <li><span class="name">Suco de maracujá</span><span class="fill"></span><span class="amt">R$11<sup>,90</sup></span></li>
+          <li><span class="name">Suco de laranja</span><span class="fill"></span><span class="amt">R$12<sup>,90</sup></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREMES -->
+<section class="menu" id="cremes">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">geladinho e cremoso</span>
+        <h2>Cr<em>e</em>mes</h2>
+      </div>
+    </div>
+    <div class="list-block">
+      <ul class="price-list">
+        <li><span class="name">Creme de morango 500ml</span><span class="fill"></span><span class="amt">R$15<sup>,90</sup></span></li>
+        <li><span class="name">Creme de cupuaçu 500ml</span><span class="fill"></span><span class="amt">R$15<sup>,90</sup></span></li>
+        <li><span class="name">Creme de maracujá 500ml</span><span class="fill"></span><span class="amt">R$15<sup>,90</sup></span></li>
+        <li><span class="name">Creme de acerola 500ml</span><span class="fill"></span><span class="amt">R$15<sup>,90</sup></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PORÇÕES -->
+<section class="menu" id="porcoes">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-tag marker">pra dividir (ou não)</span>
+        <h2>Porç<em>õ</em>es</h2>
+      </div>
+    </div>
+    <div class="list-block">
+      <ul class="price-list">
+        <li><span class="name">Batata frita grande 300g</span><span class="fill"></span><span class="amt">R$24<sup>,90</sup></span></li>
+        <li><span class="name">Batata frita c/ cheddar e bacon</span><span class="fill"></span><span class="amt">R$31<sup>,99</sup></span></li>
+        <li><span class="name">Batata pequena 100g</span><span class="fill"></span><span class="amt">R$9<sup>,90</sup></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="stamp2">ORIGINAL<br>DESDE<br>SEMPRE</div>
+  <h2>Bateu a fome?</h2>
+  <p>Chama a gente no WhatsApp e monta seu pedido — combo, artesanal, tradicional, com adicional e bebida geladinha.</p>
+  <a class="btn btn-primary" href="https://wa.me/556292717240" target="_blank" rel="noopener">📲 Chamar no WhatsApp</a>
+  <div class="foot-info">
+    <p><strong>Bocadão Burger</strong> — Cardápio sujeito a alteração sem aviso prévio.</p>
+    <p>WhatsApp: <strong>(62) 9271 7240</strong></p>
+  </div>
+</footer>
+
+<a class="float-cta" href="https://wa.me/556292717240" target="_blank" rel="noopener" aria-label="Pedir no WhatsApp">📲</a>
+
+</body>
+</html>
